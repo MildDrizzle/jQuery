@@ -12,6 +12,11 @@ const addRow = (event) => {
   const firstName = $("#data1").val();
   const lastName = $("#data2").val();
   const color = $("#color").val();
+  const pattern = /^#[0-9a-f]{3,6}$/i;
+  if (!pattern.test(color)) {
+    alert("Please enter color in hex format only");
+    return;
+  }
   const txtSize = $("#txtSize").val();
   //Unique id for all rows
   const id = Date.now();
@@ -121,6 +126,11 @@ const formString = () => {
 const applyChange = (event) => {
   event.preventDefault();
   const color = $("#changeColor").val();
+  const pattern = /^#[0-9a-f]{3,6}$/i;
+  if (!pattern.test(color)) {
+    alert("Please enter color in hex format only");
+    return;
+  }
   const text = $("#changeTextSize").val();
   //For all selected id's in the selected array change the text size and background color
   selectedArray.forEach((id) => {
