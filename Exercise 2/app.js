@@ -17,8 +17,8 @@ const addRow = (event) => {
   const id = Date.now();
   const string = `<tr id=${id}>
                       <td><input type="checkbox" class="form-check-input" onchange="selectDeselect(${id})" /></td>
-                      <td style="background-color:${color}; font-size:${txtSize}">${firstName}</td>
-                      <td style="background-color:${color}; font-size:${txtSize}">${lastName}</td>
+                      <td color="${color}" tsize="${txtSize}" style="background-color:${color}; font-size:${txtSize}">${firstName}</td>
+                      <td color="${color}" tsize="${txtSize}" style="background-color:${color}; font-size:${txtSize}">${lastName}</td>
                       <td><button class="btn btn-success" onclick="editRow(${id})">EDIT</button></td>
                       <td><button class="btn btn-danger" onclick="deleteRow(${id})">DELETE</button></td>
                     </tr>`;
@@ -39,26 +39,36 @@ const deleteRow = (id) => {
 const editRow = (id) => {
   const firstName = $(`#${id} td:eq(1)`).html();
   const lastName = $(`#${id} td:eq(2)`).html();
+  const color = $(`#${id} td:eq(1)`).attr("color");
+  const txtSize = $(`#${id} td:eq(1)`).attr("tsize");
   $("#addBtn").html("Update").attr("onclick", `updateRow(${id})`);
   $("#data1").val(firstName);
   $("#data2").val(lastName);
   $("#addBtn").toggleClass("btn-success");
   $("#addBtn").toggleClass("btn-primary");
-  $("#color").prop("disabled", true);
-  $("#txtSize").prop("disabled", true);
+  $("#color").val(color);
+  $("#txtSize").val(txtSize);
 };
 
 //Function for updating the row
 const updateRow = (id) => {
   const firstName = $("#data1").val();
   const lastName = $("#data2").val();
+  const color = $("#color").val();
+  const txtSize = $("#txtSize").val();
   $(`#${id} td:eq(1)`).html(firstName);
   $(`#${id} td:eq(2)`).html(lastName);
+  $(`#${id} td:eq(1)`).attr("color", color);
+  $(`#${id} td:eq(1)`).css("backgroundColor", color);
+  $(`#${id} td:eq(2)`).attr("color", color);
+  $(`#${id} td:eq(2)`).css("backgroundColor", color);
+  $(`#${id} td:eq(1)`).attr("tsize", txtSize);
+  $(`#${id} td:eq(2)`).attr("tsize", txtSize);
+  $(`#${id} td:eq(1)`).css("fontSize", txtSize);
+  $(`#${id} td:eq(2)`).css("fontSize", txtSize);
   $("#addBtn").html("Add").attr("onclick", `addRow()`);
   $("#addBtn").toggleClass("btn-success");
   $("#addBtn").toggleClass("btn-primary");
-  $("#color").prop("disabled", false);
-  $("#txtSize").prop("disabled", false);
   $("#addForm")[0].reset();
 };
 
@@ -118,6 +128,10 @@ const applyChange = (event) => {
     $(`#${id}`).children()[2].style.backgroundColor = color;
     $(`#${id}`).children()[1].style.fontSize = text;
     $(`#${id}`).children()[2].style.fontSize = text;
+    $(`#${id}`).children()[1].setAttribute("color", color);
+    $(`#${id}`).children()[1].setAttribute("tsize", text);
+    $(`#${id}`).children()[2].setAttribute("color", color);
+    $(`#${id}`).children()[2].setAttribute("tsize", text);
   });
   //After the values have been changed reset the form
   $("#modifyForm")[0].reset();
