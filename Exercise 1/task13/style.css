@@ -1,0 +1,17 @@
+body {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table {
+  height: 40%;
+  width: 40%;
+  border: none;
+}
+
+.found {
+  background-color: black;
+  color: white;
+}

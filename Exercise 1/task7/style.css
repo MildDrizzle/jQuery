@@ -1,0 +1,11 @@
+div {
+  background: #b0e0e6;
+  border: 1px solid #e30ae8;
+  width: 20px;
+  height: 30px;
+  margin: 0 5px;
+  float: left;
+}
+div.colored {
+  background-color: #000000;
+}

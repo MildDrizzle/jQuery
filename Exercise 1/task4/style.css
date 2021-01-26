@@ -1,0 +1,10 @@
+p {
+  margin: 8px;
+  font-size: 16px;
+}
+.rapid_font_color {
+  color: blue;
+}
+.rapid_background {
+  background: orange;
+}
